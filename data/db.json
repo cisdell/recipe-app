@@ -56,6 +56,16 @@
       "method": "buy it from mitzuwa",
       "cookingTime": "3 minutes",
       "id": "ZGc895t"
+    },
+    {
+      "title": "test",
+      "ingredients": [
+        "sdfsdf",
+        "fdfdf"
+      ],
+      "method": "tt",
+      "cookingTime": "34 minutes",
+      "id": "RqcYDG6"
     }
   ]
 }

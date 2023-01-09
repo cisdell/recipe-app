@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import { useState, useRef } from "react";
+import { useFetch } from "../../hooks/useFetch";
 import "./Create.css";
 import React from "react";
 
@@ -7,9 +7,32 @@ export default function Create() {
   const [title, setTitle] = useState("");
   const [method, setMethod] = useState("");
   const [cookingTime, setCookingTime] = useState("");
+  const [newIngredient, setNetIngredient] = useState("");
+  const [ingredients, setIngredients] = useState([]);
+  const ingredientInput = useRef(null);
+
+  const { postData, data, error } = useFetch(
+    "http://localhost:3000/recipes",
+    "POST"
+  );
+  // console.log(postData)
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(title, method, cookingTime);
+    //console.log(title, method, cookingTime, ingredients);
+    postData({ title, ingredients, method, cookingTime: cookingTime + ' minutes' });
+    console.log('new cooking recipe added')
+  };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    const ing = newIngredient.trim();
+
+    if (ing && !ingredients.includes(ing)) {
+      setIngredients((prevIngs) => [...prevIngs, ing]);
+    }
+    setNetIngredient("");
+    ingredientInput.current.focus();
   };
 
   return (
@@ -26,6 +49,26 @@ export default function Create() {
             required
           />
         </label>
+        <label>
+          <span>Recipe ingredients:</span>
+          <div className="ingredients">
+            <input
+              type="text"
+              onChange={(e) => setNetIngredient(e.target.value)}
+              value={newIngredient}
+              ref={ingredientInput}
+            />
+            <button onClick={handleAdd} className="btn">
+              add
+            </button>
+          </div>
+        </label>
+        <p>
+          Current ingredients:{" "}
+          {ingredients.map((i) => (
+            <em key={i}>{i}, </em>
+          ))}
+        </p>
 
         <label>
           <span>Recipe method:</span>

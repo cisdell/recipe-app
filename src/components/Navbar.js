@@ -1,18 +1,22 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import React from "react";
 //styles
 import "./Navbar.css";
-import Searchbar from './Searchbar';
-
-import React from "react";
+import Searchbar from "./Searchbar";
 
 export default function Navbar() {
+  const {color} = useContext(ThemeContext);
+  // console.log(color)
+
   return (
-    <div className="navbar">
+    <div className="navbar" style={{background: color}}>
       <nav>
-        <Link to="/" className='brand'>
+        <Link to="/" className="brand">
           <h1>The Thomas Keller Shop</h1>
         </Link>
-        <Searchbar/>
+        <Searchbar />
         <Link to="/create">Create Recipe</Link>
       </nav>
     </div>

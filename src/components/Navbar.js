@@ -13,9 +13,9 @@ export default function Navbar() {
 
   return (
     <div className="navbar" style={{ background: color }}>
-      <nav onClick={() => changeColor('pink')}>
+      <nav>
         <Link to="/" className="brand">
-          <h1>The Thomas Keller Shop</h1>
+          <h1>The Cho Kitchen</h1>
         </Link>
         <Searchbar />
         <Link to="/create">Create Recipe</Link>
